@@ -1,0 +1,82 @@
+version: '3'
+name: 'lucky-marty-docker'
+services:
+  sql:
+    container_name: sql
+    image: mariadb
+    restart: always
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: adonis
+    # volumes:
+    #   - dbdata:/var/lib/mysql
+
+  phpmyadmin:
+    container_name: phpmyadmin
+    image: phpmyadmin
+    restart: always
+    ports:
+      - 8888:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_HOST=sql
+      - PMA_USER=root
+      - PMA_PASSWORD=root
+
+  react:
+    container_name: vite
+    image: node:alpine
+    ports:
+     - 8000:8000
+    working_dir: /srv/app
+    volumes:
+      - type: bind
+        source: ./vite
+        target: /srv/app
+      - build:/srv/app/dist
+    tty: true
+    command: sh -c "npm install -g npm && npm install && npm run build && npm run dev; tail -f /dev/null"
+
+  adonis:
+    container_name: api
+    depends_on:
+      - sql
+    image: node:alpine
+    ports:
+      - 3333:3333
+    working_dir: /srv/api
+    volumes:
+      - type: bind
+        source: ./api
+        target: /srv/api
+    tty: true
+    environment:
+      - TZ=UTC
+      - PORT=3333
+      - HOST=0.0.0.0
+      - LOG_LEVEL=info
+      - APP_KEY=rJqiE9atRMmF1ba9KPk-podZkD2n5Mw0
+      - NODE_ENV=development
+      - DB_CONNECTION=mysql
+      - DB_HOST=sql
+      - DB_USER=root
+      - DB_PASSWORD=root
+      - DB_DATABASE=adonis
+      - DB_PORT=3306
+    command: sh -c "npm install && node ace migration:run && npm run dev; tail -f /dev/null"
+
+
+  apache:
+    container_name: lucky-todo.app
+    image: httpd:latest
+    ports:
+      - 80:80
+    volumes:
+      - build:/usr/local/apache2/htdocs
+
+volumes:
+  dbdata:
+  build:
