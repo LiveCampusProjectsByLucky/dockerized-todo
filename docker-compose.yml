@@ -11,8 +11,6 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: adonis
-    # volumes:
-    #   - dbdata:/var/lib/mysql
 
   phpmyadmin:
     container_name: phpmyadmin
@@ -28,6 +26,8 @@ services:
 
   react:
     container_name: vite
+    depends_on:
+      - adonis
     image: node:alpine
     ports:
      - 8000:8000
@@ -36,7 +36,7 @@ services:
       - type: bind
         source: ./vite
         target: /srv/app
-      - build:/srv/app/dist
+      - dist:/srv/app/dist
     tty: true
     command: sh -c "npm install -g npm && npm install && npm run build && npm run dev; tail -f /dev/null"
 
@@ -71,12 +71,14 @@ services:
 
   apache:
     container_name: lucky-todo.app
+    depends_on:
+      - adonis
     image: httpd:latest
     ports:
       - 80:80
     volumes:
-      - build:/usr/local/apache2/htdocs
+      - dist:/usr/local/apache2/htdocs
 
 volumes:
   dbdata:
-  build:
+  dist:
