@@ -13,9 +13,8 @@ function TodoListTabs() {
   const [activeTab, setActiveTab] = useState<number>();
 
   useEffect(() => {
-    // check if activeTab is in todoLists
     const isActiveTabInTabs = tabs.find((tab) => tab.id === activeTab);
-    if (!isActiveTabInTabs) {
+    if (isActiveTabInTabs === undefined) {
       setActiveTab(tabs[tabs?.length - 1]?.id);
     }
   }, [todoLists, reload]);
