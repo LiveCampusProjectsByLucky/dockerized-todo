@@ -1,5 +1,7 @@
 # Lucky Todo List
 
+![Demo](demo.gif)
+
 ## Description
 
 Dockerized Todo List *by Lucky*

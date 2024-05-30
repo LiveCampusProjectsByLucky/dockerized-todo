@@ -10,11 +10,8 @@ export default class Todolist extends BaseModel {
   @column()
   declare title: string
 
-  @column()
-  declare description: string
-
   @hasMany(() => TodolistItem, {
-    foreignKey: 'id',
+    foreignKey: 'todolistId',
     localKey: 'id'
   })
   declare items: relations.HasMany<typeof TodolistItem>

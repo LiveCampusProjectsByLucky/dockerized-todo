@@ -8,7 +8,7 @@ export default class extends BaseSchema {
       table.increments('id')
 
       table.integer('todolist_id').unsigned().references('id').inTable('todolists').onDelete('CASCADE')
-      table.string('description').notNullable()
+      table.string('title').notNullable()
       table.boolean('is_complete').defaultTo(false)
 
       table.timestamp('created_at')

@@ -9,7 +9,7 @@ export default class TodolistItem extends BaseModel {
   declare todolistId: number
 
   @column()
-  declare description: string
+  declare title: string
 
   @column()
   declare isComplete: boolean
