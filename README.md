@@ -33,6 +33,6 @@ node check-services.js
 
 | | |
 | ---- | ------- |
-| Front | localhost:80 |
+| Front | localhost:3000 |
 | API | localhost:3333/api/v1 |
 | PhpMyAdmin | localhost:8888 |
