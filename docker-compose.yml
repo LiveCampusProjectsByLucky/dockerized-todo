@@ -1,4 +1,3 @@
-version: '3'
 name: 'lucky-marty-docker'
 services:
   sql:
