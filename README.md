@@ -6,6 +6,20 @@
 
 Dockerized Todo List *by Lucky*
 
+## Installation
+
+Run simultaneously
+
+```bash
+docker-compose up
+```
+
+Run this to check all services to avoid "It's not working!!! 😠"
+
+```bash
+node check-services.js
+```
+
 ## Technologie
 
 | | |
@@ -24,18 +38,3 @@ Dockerized Todo List *by Lucky*
 | Dev | Front | localhost:8000 |
 | Dev | API | localhost:3333/api/v1 |
 |  | PhpMyAdmin | localhost:8888 |
-
-
-
-## Installation
-
-Run simultaneously
-
-```bash
-docker-compose up
-```
-
-Run this to check all services to avoid "It's not working!!! 😠"
-```bash
-node check-services.js
-```
