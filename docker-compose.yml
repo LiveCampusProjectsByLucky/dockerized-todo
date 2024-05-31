@@ -27,16 +27,18 @@ services:
 
   react:
     container_name: vite
+    depends_on:
+      - adonis
     build:
       context: ./vite
       dockerfile: Dockerfile
     ports:
       - 3000:3000
-    depends_on:
-      - adonis
 
   adonis:
     container_name: adonis
+    depends_on:
+      - sql
     build:
       context: ./api
       dockerfile: ./Dockerfile
@@ -55,4 +57,3 @@ services:
       - DB_PASSWORD=root
       - DB_DATABASE=adonis
       - DB_PORT=3306
-    command: sh -c "node build/bin/server.js; tail -f /dev/null"

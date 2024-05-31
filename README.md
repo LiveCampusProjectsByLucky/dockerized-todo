@@ -31,9 +31,8 @@ node check-services.js
 
 ## Access
 
-| | | |
-| ---- | ---- | ------- |
-| Build | Front | localhost:80 |
-| Dev | Front | localhost:8000 |
-| Dev | API | localhost:3333/api/v1 |
-|  | PhpMyAdmin | localhost:8888 |
+| | |
+| ---- | ------- |
+| Front | localhost:80 |
+| API | localhost:3333/api/v1 |
+| PhpMyAdmin | localhost:8888 |
