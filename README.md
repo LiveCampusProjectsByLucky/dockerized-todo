@@ -8,7 +8,6 @@ Dockerized Todo List *by Lucky*
 
 ## Installation
 
-Run simultaneously
 
 ```bash
 docker-compose up

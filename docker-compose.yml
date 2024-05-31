@@ -8,6 +8,8 @@ services:
     ports:
       - 3306:3306
     environment:
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: adonis
 
@@ -25,33 +27,21 @@ services:
 
   react:
     container_name: vite
+    build:
+      context: ./vite
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
     depends_on:
       - adonis
-    image: node:alpine
-    ports:
-     - 8000:8000
-    working_dir: /srv/app
-    volumes:
-      - type: bind
-        source: ./vite
-        target: /srv/app
-      - dist:/srv/app/dist
-    tty: true
-    command: sh -c "npm install -g npm && npm install && npm run build && npm run dev; tail -f /dev/null"
 
   adonis:
-    container_name: api
-    depends_on:
-      - sql
-    image: node:alpine
+    container_name: adonis
+    build:
+      context: ./api
+      dockerfile: ./Dockerfile
     ports:
       - 3333:3333
-    working_dir: /srv/api
-    volumes:
-      - type: bind
-        source: ./api
-        target: /srv/api
-    tty: true
     environment:
       - TZ=UTC
       - PORT=3333
@@ -65,18 +55,4 @@ services:
       - DB_PASSWORD=root
       - DB_DATABASE=adonis
       - DB_PORT=3306
-    command: sh -c "npm install && node ace migration:run && npm run dev; tail -f /dev/null"
-
-
-  apache:
-    container_name: lucky-todo.app
-    depends_on:
-      - adonis
-    image: httpd:latest
-    ports:
-      - 80:80
-    volumes:
-      - dist:/usr/local/apache2/htdocs
-
-volumes:
-  dist:
+    command: sh -c "node build/bin/server.js; tail -f /dev/null"

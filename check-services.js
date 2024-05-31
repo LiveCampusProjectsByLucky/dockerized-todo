@@ -10,13 +10,9 @@ const services = [
     options: { hostname: "localhost", port: 3333, timeout: 2000 },
   },
   {
-    name: "Front (build)",
-    options: { hostname: "localhost", port: 80, timeout: 2000 },
-  },
-  {
-    name: "Front (dev)",
-    options: { hostname: "localhost", port: 8000, timeout: 2000 },
-  },
+    name: "Vite",
+    options: { hostname: "localhost", port: 3000, timeout: 2000 },
+  }
 ];
 
 let loadingIntervalId = null;
