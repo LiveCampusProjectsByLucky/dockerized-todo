@@ -29,6 +29,13 @@ Dockerized Todo List *by Lucky*
 
 ## Installation
 
+Run simultaneously
+
 ```bash
 docker-compose up
+```
+
+Run this to check all services to avoid "It's not working!!! 😠"
+```bash
+node check-services.js
 ```
