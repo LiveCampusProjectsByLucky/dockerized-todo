@@ -21,4 +21,4 @@ RUN npm run build
 EXPOSE 3333
 
 # Start the application
-CMD /bin/sh -c "node ace migration:run && node build/bin/server.js && tail -f /dev/null"
+CMD /bin/sh -c "while ! nc -z sql 3306; do echo 'Waiting for the MySQL Server'; sleep 3; done && node ace migration:run && node build/bin/server.js && tail -f /dev/null"
