@@ -79,5 +79,4 @@ services:
       - dist:/usr/local/apache2/htdocs
 
 volumes:
-  dbdata:
   dist:

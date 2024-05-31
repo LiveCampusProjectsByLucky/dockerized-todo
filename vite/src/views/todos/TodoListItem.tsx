@@ -34,7 +34,7 @@ function TodoListItem({ item }: { item: TodoItemI }) {
       />
       <label
         htmlFor={item.id.toString()}
-        className={`w-full py-4 ms-2 text-sm font-medium cursor-pointer ${
+        className={`text-left w-full py-4 ms-2 text-sm font-medium cursor-pointer ${
           done
             ? "line-through text-gray-400"
             : "text-gray-900 dark:text-gray-600"
