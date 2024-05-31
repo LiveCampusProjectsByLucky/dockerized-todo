@@ -21,7 +21,7 @@ function TodoListItemAdd({ todolistId }: { todolistId: number }) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit} className="mt-8">
       <label
         htmlFor="add-todo-item"
         className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-900"
